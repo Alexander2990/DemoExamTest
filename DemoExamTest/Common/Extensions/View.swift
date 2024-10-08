@@ -11,8 +11,8 @@ import SwiftUI
 extension View {
     
     // расширение для шрифта Roboto
-    func robotoFont(size: CGFloat, weigth: Font.Weight = .regular) -> some View {
-        switch weigth {
+    func robotoFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
+        switch weight {
         case .bold:
             self
                 .font(.custom("Roboto Bold", size: size))
