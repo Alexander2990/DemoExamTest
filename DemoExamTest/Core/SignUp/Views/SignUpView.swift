@@ -17,6 +17,8 @@ struct SignUpView: View {
     
     @State private var checkBox = false
     
+    @State private var isProgress: Bool = false
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 25) {
@@ -65,7 +67,33 @@ struct SignUpView: View {
                     }
                 }
                 VStack(spacing: 17) {
-                    Button("Sign up", action: <#T##() -> Void#>)
+                    Button("Sign Up") {
+//                        send()
+                    }
+                    .buttonStyle(MainButtonStyle(progress: isProgress))
+                    
+                    VStack(spacing: 7) {
+                        HStack(spacing: 3) {
+                            Text("Already have an account?")
+                                .robotoFont(size: 14, weight: .regular)
+                                .foregroundColor(.gray)
+                            NavigationLink {
+//                                LogInView()
+                            } label: {
+                                Text("Sign In")
+                                    .robotoFont(size: 14, weight: .medium)
+                                    .foregroundColor(Color.accentColor)
+                            }
+                        }
+                        
+                        Text("or sign in using")
+                            .robotoFont(size: 14, weight: .regular)
+                            .foregroundColor(.gray)
+                        
+                        Image("iconeGoogle")
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                    }
                 }
             }
         }
