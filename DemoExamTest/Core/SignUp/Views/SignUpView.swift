@@ -86,7 +86,7 @@ struct SignUpView: View {
                 }
             }
             
-            VStack(spacing: 17) {
+            VStack(spacing: 20) {
                 Button(action: signUp) {
                     if isProgress {
                         ProgressView()

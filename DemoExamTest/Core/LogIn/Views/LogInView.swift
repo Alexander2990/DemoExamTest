@@ -12,6 +12,8 @@ struct LogInView: View {
     @State private var email = ""
     @State private var password = ""
     
+    @State private var isProgress: Bool = false
+    
     @State private var regestrationPassword = false
     
     var body: some View {
@@ -56,9 +58,44 @@ struct LogInView: View {
                         .robotoFont(size: 12, weight: .bold)
                         .foregroundColor(Color.accentColor)
                 }
-
+                
+            }
+            
+            VStack(spacing: 20) {
+                Button("Log in") {
+                    print("Error")
+                }
+                .buttonStyle(MainButtonStyle(progress: isProgress))
+                
+                VStack(spacing: 7) {
+                    HStack(spacing: 3) {
+                        Text("Already have an account?")
+                            .robotoFont(size: 14, weight: .regular)
+                            .foregroundColor(.gray)
+                        NavigationLink {
+                            SignUpView()
+                        } label: {
+                            Text("Sign Up")
+                                .foregroundColor(Color.accentColor)
+                                .robotoFont(size: 14, weight: .medium)
+                        }
+                        .foregroundColor(Color.accentColor)
+                        .tint(Color.accentColor)
+                    }
+                    
+                    Text("or sign in using")
+                        .robotoFont(size: 14, weight: .regular)
+                        .foregroundColor(.gray)
+                    
+                    Image("iconeGoogle")
+                        .resizable()
+                        .frame(width: 16, height: 16)
+                }
             }
         }
+        .padding(.vertical, 5)
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
