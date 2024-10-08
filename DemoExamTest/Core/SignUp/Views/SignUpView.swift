@@ -18,6 +18,7 @@ struct SignUpView: View {
     @State private var checkBox = false
     
     @State private var emailError: Bool = false
+    @State var isNavigate: Bool = false
     
     @State private var isProgress: Bool = false
     
@@ -71,7 +72,7 @@ struct SignUpView: View {
             }
             VStack(spacing: 17) {
                 Button("Sign Up") {
-                    //                        send()
+                    print("Email error!")
                 }
                 .buttonStyle(MainButtonStyle(progress: isProgress))
                 
@@ -81,7 +82,7 @@ struct SignUpView: View {
                             .robotoFont(size: 14, weight: .regular)
                             .foregroundColor(.gray)
                         NavigationLink {
-                            //                                LogInView()
+                            LogInView()
                         } label: {
                             Text("Sign In")
                                 .robotoFont(size: 14, weight: .medium)
@@ -98,6 +99,13 @@ struct SignUpView: View {
                         .frame(width: 16, height: 16)
                 }
             }
+            
+            NavigationLink(
+                destination: LogInView(),
+                isActive: $isNavigate,
+                label: {
+                    EmptyView()
+                })
         }
         .padding(.vertical, 5)
         .padding(.horizontal)
@@ -108,5 +116,7 @@ struct SignUpView: View {
 }
 
 #Preview {
-    SignUpView()
+    NavigationView {
+        SignUpView()
+    }
 }
