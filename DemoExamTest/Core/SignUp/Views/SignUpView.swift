@@ -27,11 +27,33 @@ struct SignUpView: View {
                     Text("Complete the sign up process to get started")
                         .robotoFont(size: 14, weight: .medium)
                         .foregroundStyle(.gray)
-                    CustomTextField(label: "Full name", placeholder: "Ivanov Ivan", text: $name)
-                    CustomTextField(label: "Phone Number", placeholder: "+7(999)999-99-99", text: $phone)
-                    CustomTextField(label: "Email Address", placeholder: "***********@mail.com", text: $email)
-                    CustomTextField(label: "Password", placeholder: "**********", text: $password, isSecure: true)
-                    CustomTextField(label: "Confirm Password", placeholder: "**********", text: $confirmPassword, isSecure: true)
+                    CustomTextField(
+                        label: "Full name",
+                        placeholder: "Ivanov Ivan",
+                        text: $name
+                    )
+                    CustomTextField(
+                        label: "Phone Number",
+                        placeholder: "+7(999)999-99-99",
+                        text: $phone
+                    )
+                    CustomTextField(
+                        label: "Email Address",
+                        placeholder: "***********@mail.com",
+                        text: $email
+                    )
+                    CustomTextField(
+                        label: "Password",
+                        placeholder: "**********",
+                        text: $password,
+                        isSecure: true
+                    )
+                    CustomTextField(
+                        label: "Confirm Password",
+                        placeholder: "**********",
+                        text: $confirmPassword,
+                        isSecure: true
+                    )
                 }
                 
                 HStack(alignment: .top, spacing: 25) {
@@ -41,7 +63,9 @@ struct SignUpView: View {
                         Text("\(Text("By ticking this box, you agree to our").foregroundColor(.gray)) \(Text("Terms and conditions and private policy").foregroundColor(.yellow))")
                             .robotoFont(size: 12)
                     }
-
+                }
+                VStack(spacing: 17) {
+                    Button("Sign up", action: <#T##() -> Void#>)
                 }
             }
         }

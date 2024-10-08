@@ -17,7 +17,12 @@ struct CustomTextField: View {
     let isSecure: Bool
     @State private var nowIsSecure = true
     
-    init(label: String, placeholder: String, text: Binding<String>, isSecure: Bool = false) {
+    init(
+        label: String,
+        placeholder: String,
+        text: Binding<String>,
+        isSecure: Bool = false
+    ) {
         self.label = label
         self.placeholder = placeholder
         self._text = text

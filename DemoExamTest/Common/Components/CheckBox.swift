@@ -19,7 +19,7 @@ struct CheckBox: View {
                     .frame(width: 14, height: 14)
                     .overlay {
                         if value {
-                            Image("checkmark")
+                            Image("square")
                                 .resizable()
                                 .frame(width: 8, height: 8)
                         }
