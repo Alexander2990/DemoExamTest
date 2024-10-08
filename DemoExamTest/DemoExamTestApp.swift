@@ -11,7 +11,7 @@ import SwiftUI
 struct DemoExamTestApp: App {
     var body: some Scene {
         WindowGroup {
-            SignUp()
+            SignUpView()
         }
     }
 }
