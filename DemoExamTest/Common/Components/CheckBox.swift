@@ -8,34 +8,19 @@
 import SwiftUI
 
 struct CheckBox: View {
-    
-    @Binding var value: Bool
-    
+    @Binding var isChecked: Bool
+
     var body: some View {
-        Group {
-            if value {
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(.blue)
-                    .frame(width: 14, height: 14)
-                    .overlay {
-                        if value {
-                            Image("square")
-                                .resizable()
-                                .frame(width: 8, height: 8)
-                        }
-                    }
-            } else {
-                RoundedRectangle(cornerRadius: 2)
-                    .stroke(Color.accentColor, lineWidth: 2)
-                    .frame(width: 14, height: 14)
-            }
-        }
-        .onTapGesture {
-            self.value.toggle()
+        Button {
+            isChecked.toggle()
+        } label: {
+            Image(systemName: isChecked ? "checkmark.square" : "square")
+                .foregroundStyle(isChecked ? .blue : .gray)
+                .frame(width: 14, height: 14)
         }
     }
 }
 
 #Preview {
-    CheckBox(value: .constant(true))
+    CheckBox(isChecked: .constant(true))
 }

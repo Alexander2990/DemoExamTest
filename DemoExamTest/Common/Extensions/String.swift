@@ -5,16 +5,13 @@
 //  Created by Александр on 08.10.2024.
 //
 
-import Foundation
-
 // MARK: String
 extension String {
+    // Регулярные выражаения
+    private static let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$"
     
-//    расширение для валидации String
     func validateEmail() -> Bool {
-        let emailRegex = "^[a-za-z0-9._%+-]+@[a-za-z0-9.-]+\\.[a-za-z]{2,3}$"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        return emailPredicate.evaluate(with: self)
+    
+        return self.range(of: String.emailRegex, options: .regularExpression) != nil
     }
 }

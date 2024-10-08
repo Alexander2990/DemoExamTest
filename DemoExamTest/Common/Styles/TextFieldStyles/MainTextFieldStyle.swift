@@ -8,28 +8,25 @@
 import SwiftUI
 
 struct MainTextFieldStyle: TextFieldStyle {
-    
-    let width: CGFloat?
-    
-    init(width: CGFloat? = nil) {
-        self.width = width
-    }
-    
+    let width: CGFloat? = nil
+
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .robotoFont(size: 14, weight: .medium)
-            .foregroundStyle(.black)
-            .frame(maxWidth: .infinity)
-            .frame(width: width, height: 45)
+            .foregroundColor(.black)
+            .frame(height: 45)
+            .frame(maxWidth: width == nil ? .infinity : nil)
+            .frame(width: width)
             .padding(.leading)
             .background(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(.gray, lineWidth: 1)
+                    .stroke(Color.gray, lineWidth: 1)
             )
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
     }
 }
+
 #Preview {
     TextField("Text", text: .constant(""))
         .textFieldStyle(MainTextFieldStyle())

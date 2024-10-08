@@ -7,24 +7,23 @@
 
 import SwiftUI
 
-// MARK: View
-extension View {
-    
-    // расширение для шрифта Roboto
-    func robotoFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
-        switch weight {
-        case .bold:
-            self
-                .font(.custom("Roboto Bold", size: size))
+extension Font.Weight {
+    var robotoFontName: String {
+        switch self {
         case .black:
-            self
-                .font(.custom("Roboto Black", size: size))
+            return "Roboto-Black"
+        case .bold:
+            return "Roboto-Bold"
         case .medium:
-            self
-                .font(.custom("Roboto Medium", size: size))
+            return "Roboto-Medium"
         default:
-            self
-                .font(.custom("Roboto Regular", size: size))
+            return "Roboto-Regular"
         }
+    }
+}
+
+extension View {
+    func robotoFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
+        self.font(.custom(weight.robotoFontName, size: size))
     }
 }

@@ -8,21 +8,14 @@
 import SwiftUI
 
 struct CustomTextField: View {
-    
     let label: String
     let placeholder: String
+    let isSecure: Bool
     
     @Binding var text: String
+    @State private var isTextHidden = true
     
-    let isSecure: Bool
-    @State private var nowIsSecure = true
-    
-    init(
-        label: String,
-        placeholder: String,
-        text: Binding<String>,
-        isSecure: Bool = false
-    ) {
+    init(label: String, placeholder: String, text: Binding<String>, isSecure: Bool = false) {
         self.label = label
         self.placeholder = placeholder
         self._text = text
@@ -33,37 +26,40 @@ struct CustomTextField: View {
         VStack(alignment: .leading) {
             Text(label)
                 .robotoFont(size: 14, weight: .bold)
-                .foregroundStyle(.gray)
+                .foregroundColor(.gray)
+            
             ZStack(alignment: .trailing) {
-                if !isSecure || !nowIsSecure {
-                    TextField(placeholder, text: $text)
-                        .textFieldStyle(MainTextFieldStyle())
-                } else {
-                    SecureField(placeholder, text: $text)
-                        .textFieldStyle(MainTextFieldStyle())
+                Group {
+                    if isSecure && isTextHidden {
+                        SecureField(placeholder, text: $text)
+                    } else {
+                        TextField(placeholder, text: $text)
+                    }
                 }
+                .textFieldStyle(MainTextFieldStyle())
                 
                 if isSecure {
                     Button(action: {
-                        self.nowIsSecure.toggle()
-                    }, label: {
-                        Image("eye.slash")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 14, height: 14)
+                        isTextHidden.toggle()
+                    }) {
+                        Image(systemName: isTextHidden ? "eye.slash" : "eye")
+                            .foregroundColor(.gray)
                             .padding(.trailing)
-                    })
+                    }
                 }
             }
         }
     }
 }
 
-#Preview {
-    CustomTextField(
-        label: "Full Name",
-        placeholder: "Some Text",
-        text: .constant(""),
-        isSecure: true
-    ).padding()
+struct CustomTextField_Previews: PreviewProvider {
+    static var previews: some View {
+        CustomTextField(
+            label: "Пароль",
+            placeholder: "Введите пароль",
+            text: .constant(""),
+            isSecure: true
+        )
+        .padding()
+    }
 }
