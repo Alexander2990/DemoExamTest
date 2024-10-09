@@ -55,8 +55,8 @@ struct CustomTextField: View {
 struct CustomTextField_Previews: PreviewProvider {
     static var previews: some View {
         CustomTextField(
-            label: "Пароль",
-            placeholder: "Введите пароль",
+            label: "Password",
+            placeholder: "Enter password",
             text: .constant(""),
             isSecure: true
         )
