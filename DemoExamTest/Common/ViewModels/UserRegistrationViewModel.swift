@@ -47,10 +47,3 @@ class UserRegistrationViewModel: ObservableObject{
     }
     
 }
-
-/*     private func signUp() {
- // Валидация email
- if !emailAddress.isValidEmail() {
-     isEmailInvalid = true
-     return
- } */

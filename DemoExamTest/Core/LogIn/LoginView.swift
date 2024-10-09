@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct LogInView: View {
+struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
     
-    @State private var isLogginIn = false
+    @State private var isLoggingIn = false
     @State private var shouldNavigateToHome = false
     
-    @State private var isRememberPassword = false
+    @State private var isRememberingPassword = false
     
     private var headerSection: some View {
         
@@ -32,15 +32,15 @@ struct LogInView: View {
     private var inputFields: some View {
         VStack {
             LabeledTextField(
-                            title: "Email Address",
+                title: "Email Address",
                 placeholder: "***********@mail.com",
-                            userInput: $email
+                userInput: $email
             )
             LabeledTextField(
-                            title: "Password",
+                title: "Password",
                 placeholder: "**********",
-                            userInput: $password,
-                            isPasswordField: true
+                userInput: $password,
+                isPasswordField: true
             )
         }
     }
@@ -48,7 +48,7 @@ struct LogInView: View {
     private var optionsSection: some View {
         HStack {
             HStack(alignment: .center, spacing: 5) {
-                StyledCheckBox(isChecked: $isRememberPassword)
+                StyledCheckBox(isChecked: $isRememberingPassword)
                 Text("Remember password")
                     .applyRobotoFont(size: 14, weight: .medium)
                     .foregroundColor(.gray)
@@ -71,7 +71,7 @@ struct LogInView: View {
             Button("Log in") {
                 print("Error")
             }
-            .buttonStyle(CustomButtonStyle(progress: isLogginIn))
+            .buttonStyle(CustomButtonStyle(progress: isLoggingIn))
             
             VStack(spacing: 8) {
                 HStack(spacing: 3) {
@@ -114,6 +114,9 @@ struct LogInView: View {
             headerSection
             inputFields
             optionsSection
+            
+            Spacer().frame(height: 10)
+            
             actionButtons
             navigationLinkToHome
         }
@@ -123,11 +126,11 @@ struct LogInView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    private func logIn() {
+    private func performLogin() {
         // Логика входа
-        isLogginIn = true
+        isLoggingIn = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            isLogginIn = false
+            isLoggingIn = false
             shouldNavigateToHome = true
         }
     }
@@ -138,5 +141,5 @@ struct LogInView: View {
 }
 
 #Preview {
-    LogInView()
+    LoginView()
 }

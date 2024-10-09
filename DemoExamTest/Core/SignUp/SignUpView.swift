@@ -9,19 +9,10 @@ import SwiftUI
 
 struct SignUpView: View {
     
-    @State private var userName = ""
-    @State private var phoneNumber = ""
-    @State private var emailAddres = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
-    
     @State private var isTermsAccepted = false
-    
-    @State private var isEmailInvalid = false
-    
+    @State private var isEmailValid = false
     @State private var isProgress = false
-    
-    @StateObject var userViewModel = UserViewModel()
+    @StateObject var signUpViewModel = UserRegistrationViewModel()
     
     private var termsAndConditionsText: some View {
         
@@ -49,7 +40,7 @@ struct SignUpView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 50) {
+            VStack(alignment: .leading, spacing: 30) {
                 VStack(alignment: .leading, spacing: 15) {
                     Text("Create an account")
                         .applyRobotoFont(size: 24, weight: .medium)
@@ -62,28 +53,28 @@ struct SignUpView: View {
                     LabeledTextField(
                         title: "Full name",
                         placeholder: "Ivanov Ivan",
-                        userInput: $userViewModel.user.name
+                        userInput: $signUpViewModel.user.name
                     )
                     LabeledTextField(
                         title: "Phone Number",
                         placeholder: "+7(999)999-99-99",
-                        userInput: $userViewModel.user.phone
+                        userInput: $signUpViewModel.user.phone
                     )
                     LabeledTextField(
                         title: "Email Address",
                         placeholder: "***********@mail.com",
-                        userInput: $userViewModel.email
+                        userInput: $signUpViewModel.email
                     )
                     LabeledTextField(
                         title: "Password",
                         placeholder: "**********",
-                        userInput: $userViewModel.password,
+                        userInput: $signUpViewModel.password,
                         isPasswordField: true
                     )
                     LabeledTextField(
                         title: "Confirm Password",
                         placeholder: "**********",
-                        userInput: $userViewModel.confirmPassword,
+                        userInput: $signUpViewModel.confirmPassword,
                         isPasswordField: true
                     )
                 }
@@ -95,7 +86,7 @@ struct SignUpView: View {
                 }
                 
                 VStack(spacing: 20) {
-                    Button(action: userViewModel.signUp) {
+                    Button(action: signUpViewModel.signUp) {
                         if isProgress {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
@@ -111,7 +102,7 @@ struct SignUpView: View {
                                 .applyRobotoFont(size: 14, weight: .regular)
                                 .foregroundColor(.gray)
                             
-                            NavigationLink(destination: LogInView()) {
+                            NavigationLink(destination: LoginView()) {
                                 Text("Sign In")
                                     .applyRobotoFont(size: 14, weight: .medium)
                                     .foregroundColor(.accentColor)
@@ -134,30 +125,11 @@ struct SignUpView: View {
             .padding(.vertical, 5)
             .padding(.horizontal)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .alert("Email Error", isPresented: $isEmailInvalid) {
+            .alert("Email Error", isPresented: $isEmailValid) {
                 Button("OK", role: .cancel) { }
             }
         }
         .navigationBarHidden(true)
-    }
-    
-    
-    
-    private func signUp() {
-        // Валидация email
-        if !emailAddres.isValidEmail() {
-            isEmailInvalid = true
-            return
-        }
-        
-        // Начало процесса регистрации
-        isProgress = true
-        
-        // Имитация процесса регистрации
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            isProgress = false
-            // Логика после успешной регистрации
-        }
     }
     
     private func signInWithGoogle() {
