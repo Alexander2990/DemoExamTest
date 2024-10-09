@@ -18,11 +18,20 @@ class UserRegistrationViewModel: ObservableObject{
     @Published var isProgress = false
     @Published var isNavigate = false
     @Published var error = false
+    @Published var errorMessage = ""
     
     func signUp() {
         
         Task {
             do {
+                // Проверка валидации email
+                guard email.isValidEmail() else {
+                    await MainActor.run {
+                        self.errorMessage = "Invalid email format"
+                        self.error = true
+                    }
+                    return
+                }
                 await MainActor.run {
                     self.isProgress = true
                 }

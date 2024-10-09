@@ -69,7 +69,7 @@ struct LoginView: View {
     private var actionButtons: some View {
         VStack(spacing: 20) {
             Button("Log in") {
-                print("Error")
+                performLogin()
             }
             .buttonStyle(CustomButtonStyle(progress: isLoggingIn))
             

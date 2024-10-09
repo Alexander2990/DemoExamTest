@@ -10,7 +10,7 @@ import SwiftUI
 struct SignUpView: View {
     
     @State private var isTermsAccepted = false
-    @State private var isEmailValid = false
+    @State private var isEmailInvalid = false
     @State private var isProgress = false
     @StateObject var signUpViewModel = UserRegistrationViewModel()
     
@@ -125,7 +125,7 @@ struct SignUpView: View {
             .padding(.vertical, 5)
             .padding(.horizontal)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .alert("Email Error", isPresented: $isEmailValid) {
+            .alert("Email Error", isPresented: $isEmailInvalid) {
                 Button("OK", role: .cancel) { }
             }
         }
