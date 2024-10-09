@@ -7,35 +7,35 @@
 
 import SwiftUI
 
-struct MainButtonStyle: ButtonStyle {
-    let disabled: Bool
+struct CustomButtonStyle: ButtonStyle {
+    let isDisabled: Bool
     let width: CGFloat?
-    let progress: Bool
-
+    let isLoading: Bool
+    
     init(disabled: Bool = false, width: CGFloat? = nil, progress: Bool = false) {
-        self.disabled = disabled
+        self.isDisabled = disabled
         self.width = width
-        self.progress = progress
+        self.isLoading = progress
     }
-
+    
     func makeBody(configuration: Configuration) -> some View {
         Group {
-            if progress {
+            if isLoading {
                 ProgressView()
                     .tint(.white)
             } else {
                 configuration.label
             }
         }
-        .robotoFont(size: 14, weight: .bold)
+        .applyRobotoFont(size: 14, weight: .bold)
         .foregroundStyle(.white)
         .frame(height: 50)
         .frame(maxWidth: .infinity)
         .frame(width: width)
         .background(
-            disabled ? Color.gray :
-            configuration.isPressed ? Color.accentColor.opacity(0.6) :
-            progress ? Color.accentColor : Color.gray
+            isDisabled ? Color.gray :
+                configuration.isPressed ? Color.accentColor.opacity(0.6) :
+                    .gray
         )
         .clipShape(RoundedRectangle(cornerRadius: 5))
     }
@@ -45,6 +45,6 @@ struct MainButtonStyle: ButtonStyle {
     Button("Label") {
         // Действие кнопки
     }
-    .buttonStyle(MainButtonStyle())
+    .buttonStyle(CustomButtonStyle())
     .padding()
 }

@@ -7,21 +7,23 @@
 
 import SwiftUI
 
-struct CustomCheckBox: View {
+struct StyledCheckBox: View {
     
     @Binding var isChecked: Bool
 
     var body: some View {
-        Button {
+        
+        Button (action: {
             isChecked.toggle()
-        } label: {
+        }) {
             Image(systemName: isChecked ? "checkmark.square" : "square")
-                .foregroundStyle(isChecked ? .blue : .gray)
+                .resizable()
                 .frame(width: 14, height: 14)
+                .foregroundColor(isChecked ? .blue : .gray)
         }
     }
 }
 
 #Preview {
-    CustomCheckBox(isChecked: .constant(true))
+    StyledCheckBox(isChecked: .constant(true))
 }

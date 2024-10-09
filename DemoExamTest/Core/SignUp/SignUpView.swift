@@ -25,25 +25,25 @@ struct SignUpView: View {
     
     private var termsAndConditionsText: some View {
         
-            VStack {
-                (
-                    Text("By ticking this box, you agree to our ")
-                        .foregroundColor(.gray)
-                    + Text("Terms and Conditions and Privacy Policy")
-                        .foregroundColor(.yellow)
-                        .underline()
-                )
-                .robotoFont(size: 12)
-                .multilineTextAlignment(.center)
-                .onTapGesture {
-                    if let url = URL(string: "https://developer.apple.com/") {
-                        openURL(url)
-                    }
+        VStack {
+            (
+                Text("By ticking this box, you agree to our ")
+                    .foregroundColor(.gray)
+                + Text("Terms and Conditions and Privacy Policy")
+                    .foregroundColor(.yellow)
+                    .underline()
+            )
+            .applyRobotoFont(size: 12)
+            .multilineTextAlignment(.center)
+            .onTapGesture {
+                if let url = URL(string: "https://developer.apple.com/") {
+                    openURL(url)
                 }
-                .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true)
             }
+            .lineLimit(nil)
+            .fixedSize(horizontal: false, vertical: true)
         }
+    }
     
     @Environment(\.openURL) var openURL
     
@@ -52,44 +52,44 @@ struct SignUpView: View {
             VStack(alignment: .leading, spacing: 50) {
                 VStack(alignment: .leading, spacing: 15) {
                     Text("Create an account")
-                        .robotoFont(size: 24, weight: .medium)
+                        .applyRobotoFont(size: 24, weight: .medium)
                         .foregroundStyle(.black)
                     
                     Text("Complete the sign up process to get started")
-                        .robotoFont(size: 14, weight: .medium)
+                        .applyRobotoFont(size: 14, weight: .medium)
                         .foregroundStyle(.gray)
                     
-                    CustomTextField(
-                        label: "Full name",
+                    LabeledTextField(
+                        title: "Full name",
                         placeholder: "Ivanov Ivan",
-                        text: $userViewModel.user.name
+                        userInput: $userViewModel.user.name
                     )
-                    CustomTextField(
-                        label: "Phone Number",
+                    LabeledTextField(
+                        title: "Phone Number",
                         placeholder: "+7(999)999-99-99",
-                        text: $userViewModel.user.phone
+                        userInput: $userViewModel.user.phone
                     )
-                    CustomTextField(
-                        label: "Email Address",
+                    LabeledTextField(
+                        title: "Email Address",
                         placeholder: "***********@mail.com",
-                        text: $userViewModel.email
+                        userInput: $userViewModel.email
                     )
-                    CustomTextField(
-                        label: "Password",
+                    LabeledTextField(
+                        title: "Password",
                         placeholder: "**********",
-                        text: $userViewModel.password,
-                        isSecure: true
+                        userInput: $userViewModel.password,
+                        isPasswordField: true
                     )
-                    CustomTextField(
-                        label: "Confirm Password",
+                    LabeledTextField(
+                        title: "Confirm Password",
                         placeholder: "**********",
-                        text: $userViewModel.confirmPassword,
-                        isSecure: true
+                        userInput: $userViewModel.confirmPassword,
+                        isPasswordField: true
                     )
                 }
                 
                 HStack(alignment: .top, spacing: 10) {
-                    CustomCheckBox(isChecked: $isTermsAccepted)
+                    StyledCheckBox(isChecked: $isTermsAccepted)
                     
                     termsAndConditionsText
                 }
@@ -103,24 +103,24 @@ struct SignUpView: View {
                             Text("Sign Up")
                         }
                     }
-                    .buttonStyle(MainButtonStyle())
+                    .buttonStyle(CustomButtonStyle())
                     
                     VStack(spacing: 8) {
                         HStack(spacing: 4) {
                             Text("Already have an account?")
-                                .robotoFont(size: 14, weight: .regular)
+                                .applyRobotoFont(size: 14, weight: .regular)
                                 .foregroundColor(.gray)
                             
                             NavigationLink(destination: LogInView()) {
                                 Text("Sign In")
-                                    .robotoFont(size: 14, weight: .medium)
+                                    .applyRobotoFont(size: 14, weight: .medium)
                                     .foregroundColor(.accentColor)
                                     .navigationBarBackButtonHidden(false)
                             }
                         }
                         
                         Text("or sign in using")
-                            .robotoFont(size: 14, weight: .regular)
+                            .applyRobotoFont(size: 14, weight: .regular)
                             .foregroundColor(.gray)
                         
                         Button(action: signInWithGoogle) {
@@ -145,7 +145,7 @@ struct SignUpView: View {
     
     private func signUp() {
         // Валидация email
-        if !emailAddres.validateEmail() {
+        if !emailAddres.isValidEmail() {
             isEmailInvalid = true
             return
         }

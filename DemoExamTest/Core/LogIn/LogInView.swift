@@ -21,26 +21,26 @@ struct LogInView: View {
         
         VStack(alignment: .leading, spacing: 5) {
             Text("Welcome Back")
-                .robotoFont(size: 24, weight: .medium)
+                .applyRobotoFont(size: 24, weight: .medium)
                 .foregroundStyle(.black)
             Text("Fill in your email and password to continue")
-                .robotoFont(size: 14, weight: .medium)
+                .applyRobotoFont(size: 14, weight: .medium)
                 .foregroundStyle(.gray)
         }
     }
     
     private var inputFields: some View {
         VStack {
-            CustomTextField(
-                label: "Email Address",
+            LabeledTextField(
+                            title: "Email Address",
                 placeholder: "***********@mail.com",
-                text: $email
+                            userInput: $email
             )
-            CustomTextField(
-                label: "Password",
+            LabeledTextField(
+                            title: "Password",
                 placeholder: "**********",
-                text: $password,
-                isSecure: true
+                            userInput: $password,
+                            isPasswordField: true
             )
         }
     }
@@ -48,9 +48,9 @@ struct LogInView: View {
     private var optionsSection: some View {
         HStack {
             HStack(alignment: .center, spacing: 5) {
-                CustomCheckBox(isChecked: $isRememberPassword)
+                StyledCheckBox(isChecked: $isRememberPassword)
                 Text("Remember password")
-                    .robotoFont(size: 14, weight: .medium)
+                    .applyRobotoFont(size: 14, weight: .medium)
                     .foregroundColor(.gray)
             }
             Spacer()
@@ -59,7 +59,7 @@ struct LogInView: View {
                 ForgotPasswordView()
             } label: {
                 Text("Forgot password?")
-                    .robotoFont(size: 12, weight: .bold)
+                    .applyRobotoFont(size: 12, weight: .bold)
                     .foregroundColor(Color.accentColor)
             }
             
@@ -71,26 +71,26 @@ struct LogInView: View {
             Button("Log in") {
                 print("Error")
             }
-            .buttonStyle(MainButtonStyle(progress: isLogginIn))
+            .buttonStyle(CustomButtonStyle(progress: isLogginIn))
             
             VStack(spacing: 8) {
                 HStack(spacing: 3) {
                     Text("Don't have an account?")
-                        .robotoFont(size: 14, weight: .regular)
+                        .applyRobotoFont(size: 14, weight: .regular)
                         .foregroundColor(.gray)
                     NavigationLink {
                         SignUpView()
                     } label: {
                         Text("Sign Up")
                             .foregroundColor(Color.accentColor)
-                            .robotoFont(size: 14, weight: .medium)
+                            .applyRobotoFont(size: 14, weight: .medium)
                     }
                     .foregroundColor(Color.accentColor)
                     .tint(Color.accentColor)
                 }
                 
                 Text("or sign in using")
-                    .robotoFont(size: 14, weight: .regular)
+                    .applyRobotoFont(size: 14, weight: .regular)
                     .foregroundColor(.gray)
                 
                 Image("iconeGoogle")

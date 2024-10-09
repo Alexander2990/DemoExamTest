@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-struct MainTextFieldStyle: TextFieldStyle {
-    let width: CGFloat? = nil
+struct CustomTextFieldStyle: TextFieldStyle {
+    let maxWidth: CGFloat? = nil
     
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .robotoFont(size: 14, weight: .medium)
+            .applyRobotoFont(size: 14, weight: .medium)
             .foregroundColor(.black)
             .frame(height: 45)
-            .frame(maxWidth: width == nil ? .infinity : nil)
-            .frame(width: width)
+            .frame(maxWidth: maxWidth ?? .infinity)
             .padding(.leading)
             .background(
                 RoundedRectangle(cornerRadius: 5)
@@ -29,6 +28,6 @@ struct MainTextFieldStyle: TextFieldStyle {
 
 #Preview {
     TextField("Text", text: .constant(""))
-        .textFieldStyle(MainTextFieldStyle())
+        .textFieldStyle(CustomTextFieldStyle())
         .padding()
 }

@@ -7,11 +7,11 @@
 
 // MARK: String
 extension String {
-    // Регулярные выражаения
-    private static let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$"
+    // Регулярное выражение для email
+    private static let emailValidationPattern = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$"
     
-    func validateEmail() -> Bool {
+    func isValidEmail() -> Bool {
     
-        return self.range(of: String.emailRegex, options: .regularExpression) != nil
+        self.range(of: Self.emailValidationPattern, options: .regularExpression) != nil
     }
 }

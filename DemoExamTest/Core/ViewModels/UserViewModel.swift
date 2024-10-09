@@ -9,7 +9,7 @@ import Foundation
 
 class UserViewModel: ObservableObject{
     
-    @Published var user = UserModel(id: UUID(), name: "Ivanov", phone: "12345678", created_at: .now)
+    @Published var user = UserModel(id: UUID(), name: "", phone: "", created_at: .now)
     
     @Published var email = ""
     @Published var password = ""

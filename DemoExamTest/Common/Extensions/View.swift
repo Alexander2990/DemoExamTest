@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Font.Weight {
-    var robotoFontName: String {
+    var robotoName: String {
         switch self {
         case .black:
             return "Roboto-Black"
@@ -23,7 +23,7 @@ extension Font.Weight {
 }
 
 extension View {
-    func robotoFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
-        self.font(.custom(weight.robotoFontName, size: size))
+    func applyRobotoFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
+        self.font(.custom(weight.robotoName, size: size))
     }
 }
