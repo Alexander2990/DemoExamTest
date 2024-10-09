@@ -21,6 +21,8 @@ struct SignUpView: View {
     
     @State private var isProgress = false
     
+    @StateObject var userViewModel = UserViewModel()
+    
     private var termsAndConditionsText: some View {
         
             VStack {
@@ -60,40 +62,40 @@ struct SignUpView: View {
                     CustomTextField(
                         label: "Full name",
                         placeholder: "Ivanov Ivan",
-                        text: $userName
+                        text: $userViewModel.user.name
                     )
                     CustomTextField(
                         label: "Phone Number",
                         placeholder: "+7(999)999-99-99",
-                        text: $phoneNumber
+                        text: $userViewModel.user.phone
                     )
                     CustomTextField(
                         label: "Email Address",
                         placeholder: "***********@mail.com",
-                        text: $emailAddres
+                        text: $userViewModel.email
                     )
                     CustomTextField(
                         label: "Password",
                         placeholder: "**********",
-                        text: $password,
+                        text: $userViewModel.password,
                         isSecure: true
                     )
                     CustomTextField(
                         label: "Confirm Password",
                         placeholder: "**********",
-                        text: $confirmPassword,
+                        text: $userViewModel.confirmPassword,
                         isSecure: true
                     )
                 }
                 
                 HStack(alignment: .top, spacing: 10) {
-                    CheckBox(isChecked: $isTermsAccepted)
+                    CustomCheckBox(isChecked: $isTermsAccepted)
                     
                     termsAndConditionsText
                 }
                 
                 VStack(spacing: 20) {
-                    Button(action: signUp) {
+                    Button(action: userViewModel.signUp) {
                         if isProgress {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())

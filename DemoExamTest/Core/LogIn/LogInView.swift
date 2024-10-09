@@ -48,7 +48,7 @@ struct LogInView: View {
     private var optionsSection: some View {
         HStack {
             HStack(alignment: .center, spacing: 5) {
-                CheckBox(isChecked: $isRememberPassword)
+                CustomCheckBox(isChecked: $isRememberPassword)
                 Text("Remember password")
                     .robotoFont(size: 14, weight: .medium)
                     .foregroundColor(.gray)

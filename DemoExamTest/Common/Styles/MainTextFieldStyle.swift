@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainTextFieldStyle: TextFieldStyle {
     let width: CGFloat? = nil
-
+    
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .robotoFont(size: 14, weight: .medium)

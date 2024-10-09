@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CheckBox: View {
+struct CustomCheckBox: View {
     
     @Binding var isChecked: Bool
 
@@ -23,5 +23,5 @@ struct CheckBox: View {
 }
 
 #Preview {
-    CheckBox(isChecked: .constant(true))
+    CustomCheckBox(isChecked: .constant(true))
 }
