@@ -17,6 +17,11 @@ struct LoginView: View {
     
     @State private var isRememberingPassword = false
     
+    // Проверка на заполненность полей
+    private var isFormValid: Bool {
+        !email.isEmpty && !password.isEmpty
+    }
+    
     private var headerSection: some View {
         
         VStack(alignment: .leading, spacing: 5) {
@@ -71,7 +76,8 @@ struct LoginView: View {
             Button("Log in") {
                 performLogin()
             }
-            .buttonStyle(CustomButtonStyle(progress: isLoggingIn))
+            .buttonStyle(CustomButtonStyle(disabled: !isFormValid, isLoading: isLoggingIn))
+            .disabled(!isFormValid)
             
             VStack(spacing: 8) {
                 HStack(spacing: 3) {

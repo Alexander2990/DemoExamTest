@@ -12,10 +12,10 @@ struct CustomButtonStyle: ButtonStyle {
     let width: CGFloat?
     let isLoading: Bool
     
-    init(disabled: Bool = false, width: CGFloat? = nil, progress: Bool = false) {
+    init(disabled: Bool = false, width: CGFloat? = nil, isLoading: Bool = false) {
         self.isDisabled = disabled
         self.width = width
-        self.isLoading = progress
+        self.isLoading = isLoading
     }
     
     func makeBody(configuration: Configuration) -> some View {
@@ -35,9 +35,10 @@ struct CustomButtonStyle: ButtonStyle {
         .background(
             isDisabled ? Color.gray :
                 configuration.isPressed ? Color.accentColor.opacity(0.6) :
-                    .gray
+                    .blue // Синий цвет для активной кнопки
         )
         .clipShape(RoundedRectangle(cornerRadius: 5))
+        .opacity(isDisabled ? 0.5 : 1.0) // Прозрачность для неактивной кнопки
     }
 }
 

@@ -10,15 +10,13 @@ import SwiftUI
 struct ForgotPasswordView: View {
     
     @State private var email = ""
-    @State private var isProgress = false
+    @State private var isLoading = false
     
-    @State var connectedError = false
-    @State private var error = false
+    @State private var isErrorPresented = false
     
     var body: some View {
         
         VStack(alignment: .leading, spacing: 40) {
-            
             VStack(alignment: .leading, spacing: 5) {
                 Text("Forgot Password")
                     .applyRobotoFont(size: 24, weight: .medium)
@@ -28,13 +26,17 @@ struct ForgotPasswordView: View {
                     .foregroundStyle(.gray)
             }
             
-            VStack {
-                LabeledTextField(title: "Email Address", placeholder: "***********@mail.com", userInput: $email)
-            }
+            
+            LabeledTextField(
+                title: "Email Address",
+                placeholder: "***********@mail.com",
+                userInput: $email
+            )
+            
             VStack(spacing: 18) {
                 Button("Send OTP") {
-                    //
-                }.buttonStyle(CustomButtonStyle(progress: isProgress))
+                    // Логика
+                }.buttonStyle(CustomButtonStyle(isLoading: isLoading))
                 
                 VStack(spacing: 6) {
                     HStack(spacing: 4) {
@@ -60,14 +62,9 @@ struct ForgotPasswordView: View {
         .padding(.horizontal)
         .frame(maxWidth: .infinity, alignment: .leading)
         .navigationBarHidden(true)
-        .alert("Network Error", isPresented: $connectedError) {
-            
-        }
-        .alert("Supabase Erro", isPresented: $error) {
-            
-        }
     }
 }
+
 
 #Preview {
     ForgotPasswordView()

@@ -17,6 +17,7 @@ class UserRegistrationViewModel: ObservableObject{
     
     @Published var isProgress = false
     @Published var isNavigate = false
+    @Published var isNavigateToLogin = false // Состояние для навигации
     @Published var error = false
     @Published var errorMessage = ""
     
@@ -42,7 +43,7 @@ class UserRegistrationViewModel: ObservableObject{
                     password: password
                 )
                 await MainActor.run {
-                    self.isNavigate = true
+                    self.isNavigateToLogin = true
                     self.isProgress = false
                 }
             } catch {

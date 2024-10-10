@@ -12,10 +12,22 @@ struct SignUpView: View {
     @State private var isTermsAccepted = false
     @State private var isEmailInvalid = false
     @State private var isProgress = false
+    @State private var showAlert = false
+    
     @StateObject var signUpViewModel = UserRegistrationViewModel()
     
+    // Функция проверки заполнения всех полей
+    private var isFormValid: Bool {
+        return !signUpViewModel.user.name.isEmpty &&
+        !signUpViewModel.user.phone.isEmpty &&
+        !signUpViewModel.email.isEmpty &&
+        !signUpViewModel.password.isEmpty &&
+        !signUpViewModel.confirmPassword.isEmpty &&
+        signUpViewModel.password == signUpViewModel.confirmPassword &&
+        isTermsAccepted
+    }
+    
     private var termsAndConditionsText: some View {
-        
         VStack {
             (
                 Text("By ticking this box, you agree to our ")
@@ -86,7 +98,13 @@ struct SignUpView: View {
                 }
                 
                 VStack(spacing: 20) {
-                    Button(action: signUpViewModel.signUp) {
+                    Button(action: {
+                        if !signUpViewModel.email.isValidEmail() {
+                            isEmailInvalid = true // Показать alert
+                        } else {
+                            signUpViewModel.signUp() // Выполнить регистрацию, если email валиден
+                        }
+                    }) {
                         if isProgress {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
@@ -94,7 +112,8 @@ struct SignUpView: View {
                             Text("Sign Up")
                         }
                     }
-                    .buttonStyle(CustomButtonStyle())
+                    .buttonStyle(CustomButtonStyle(disabled: !isFormValid))
+                    .disabled(!isFormValid) // Блокировка кнопки, если форма невалидна
                     
                     VStack(spacing: 8) {
                         HStack(spacing: 4) {
@@ -121,11 +140,14 @@ struct SignUpView: View {
                         }
                     }
                 }
+                NavigationLink(destination: LoginView(), isActive: $signUpViewModel.isNavigateToLogin) {
+                    EmptyView()
+                }
             }
             .padding(.vertical, 5)
             .padding(.horizontal)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .alert("Email Error", isPresented: $isEmailInvalid) {
+            .alert("Invalid Email", isPresented: $isEmailInvalid) {
                 Button("OK", role: .cancel) { }
             }
         }
